@@ -1,0 +1,25 @@
+require 'angular'
+require 'angular-animate'
+require 'angular-aria'
+require 'angular-i18n/ja'
+
+require 'angular-ui-router'
+require 'angular-loading-bar'
+require 'angular-moment'
+require 'ng-table'
+require 'highcharts-ng'
+
+require 'models.coffee'
+require 'filters.coffee'
+require 'services.coffee'
+require 'directives.coffee'
+
+require 'components/list/list.coffee'
+require 'components/detail/detail.coffee'
+require 'components/summary/summary.coffee'
+require 'components/combatants/combatants.coffee'
+require 'components/damage/damage.coffee'
+require 'components/swings/swings.coffee'
+
+require 'app.coffee'
+require 'app.scss'

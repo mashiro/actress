@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-12">
+    <p class="btn-group pull-right">
+      <label class="checkbox-inline">
+        <input type="checkbox" autocomplete="off" ng-model="swings.with.aa"> Auto Attack
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" autocomplete="off" ng-model="swings.with.ws"> Weapon Skill
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" autocomplete="off" ng-model="swings.with.dot"> DoT
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" autocomplete="off" ng-model="swings.with.heal"> Heal
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" autocomplete="off" ng-model="swings.with.hot"> HoT
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" autocomplete="off" ng-model="swings.with.buff"> Buff/Debuff
+      </label>
+    </p>
+  </div>
+
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table ng-table="swings.tableParams" id="swings" class="table">
+        <tbody>
+          <tr ng-repeat="swing in $data">
+            <td data-title="'Time'" data-sortable="'stime'">{{swing.stime | date : "medium"}}</td>
+            <td data-title="'Attack Type'" data-sortable="'attacktype'">{{swing.attacktype}}</td>
+            <td data-title="'Damage Type'" data-sortable="'damagetype'">{{swing.damagetype}}</td>
+            <td data-title="'Victim'" data-sortable="'victim'">{{swing.victim}}</td>
+            <td data-title="'Damage'" data-sortable="'damage'" class="text-right">{{swing.damage}}</td>
+            <td data-title="'Critical'" data-sortable="'critical'" class="text-center">{{swing.critical === 'T' ? '✔' : ''}}</td>
+            <td data-title="'Adjust'" data-sortable="'dmgadjust'" class="text-right">{{swing.dmgadjust}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

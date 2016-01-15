@@ -1,0 +1,28 @@
+<!doctype>
+<html lang="ja" ng-app="actress" ng-strict-di ng-controller="AppController as app">
+  <head>
+    <base href="/">
+    <meta name="viewport" content="initial-scale=1">
+    <meta property="og:title" content="{{app.ogp.title()}}">
+    <meta property="og:type" content="{{app.ogp.type()}}">
+    <meta property="og:url" content="{{app.ogp.url()}}">
+    <title ng-bind="title()"></title>
+    <link rel="stylesheet" href="/actress.css">
+    <style>[ng-cloak] { display: none !important; }</style>
+  </head>
+  <body ng-cloak>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">ACTress</a>
+        </div>
+      </div>
+    </nav>
+
+    <div id="main" class="container-fluid">
+      <div ui-view class="fade-animation"></div>
+    </div>
+
+    <script async src="/actress.js"></script>
+  </body>
+</html>

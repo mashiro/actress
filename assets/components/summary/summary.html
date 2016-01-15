@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-6">
+    <dl class="dl-horizontal">
+      <dt>Start Time</dt>
+      <dd>{{summary.encounter.starttime | date : "medium"}}</dd>
+
+      <dt>Duration</dt>
+      <dd>{{summary.encounter.duration | minutes}}</dd>
+
+      <dt>DPS</dt>
+      <dd>{{summary.encounter.encdps | number:2}}</dd>
+
+      <dt>Deaths</dt>
+      <dd>{{summary.encounter.deaths}}</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <p class="clearfix">
+      <span class="btn-group pull-right">
+        <label class="checkbox-inline">
+          <input type="checkbox" autocomplete="off" ng-model="summary.includeEnemies"> Include enemeies
+        </label>
+      </span>
+    </p>
+
+    <div class="table-responsive">
+      <table ng-table="summary.tableParams" id="combatants" class="table">
+        <tbody>
+          <tr ng-repeat="combatant in $data">
+            <td data-title="'Name'" data-sortable="'name'">
+              <img class="job" ng-src="{{summary.utils.iconUrl(combatant)}}" err-src="{{summary.utils.errIconUrl()}}" alt="{{combatant.job}}" title="{{combatant.job}}">
+              <span class="name">{{combatant.name}}</span>
+            </td>
+            <td data-title="'DPS'" data-sortable="'encdps'" class="text-right">{{combatant.encdps | number:2}}</td>
+            <td data-title="'Damage'" data-sortable="'damage'" class="text-right">{{combatant.damage}}</td>
+            <td data-title="'HPS'" data-sortable="'enchps'" class="text-right">{{combatant.enchps | number:2}}</td>
+            <td data-title="'Healed'" data-sortable="'healed'" class="text-right">{{combatant.healed}}</td>
+            <td data-title="'Overheal (%)'" data-sortable="'overhealpct'" class="text-right">{{combatant.overhealpct}}</td>
+            <td data-title="'Damage Taken'" data-sortable="'damagetaken'" class="text-right">{{combatant.damagetaken}}</td>
+            <td data-title="'Deaths'" data-sortable="'deaths'" class="text-right">{{combatant.deaths}}</td>
+            <td data-title="'ToHit (%)'" data-sortable="'tohit'" class="text-right">{{combatant.tohit | number:2}}%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <highchart id="dsp-chart" config="dspChartConfig"></highchart>
+    <!-- <div id="dps-chart"></div> -->
+  </div>
+</div>

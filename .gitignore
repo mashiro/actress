@@ -1,0 +1,11 @@
+/.bundle/
+/.direnv/
+/public/
+/node_modules/
+/bower_components/
+/config/database.yml
+/.ruby-version
+/.envrc
+/log/*
+/tmp/*
+!.keep

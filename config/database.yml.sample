@@ -1,0 +1,7 @@
+adapter: mysql2
+encoding: utf8mb4
+host: localhost
+database: act
+username: act
+password: secret
+pool: 5

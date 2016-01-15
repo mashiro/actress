@@ -1,0 +1,3 @@
+#!/bin/bash
+ROOT_DIR=$(cd $(dirname $0)/.. && pwd)
+bundle exec pumactl -P $ROOT_DIR/tmp/actress.pid $1

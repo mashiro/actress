@@ -1,0 +1,32 @@
+{
+  "name": "actress",
+  "version": "0.0.0",
+  "description": "act log viewer",
+  "author": "mashiro",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer-loader": "^3.1.0",
+    "bower-webpack-plugin": "^0.1.9",
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.9.1",
+    "css-loader": "^0.23.1",
+    "exports-loader": "^0.6.2",
+    "expose-loader": "^0.7.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.1",
+    "html-loader": "^0.4.0",
+    "imports-loader": "^0.6.3",
+    "minimist": "^1.1.1",
+    "ng-annotate-loader": "^0.1.0",
+    "node-sass": "^3.1.0",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.10.5"
+  },
+  "scripts": {
+    "watch": "webpack -wd --progress",
+    "build": "webpack -p --progress"
+  }
+}

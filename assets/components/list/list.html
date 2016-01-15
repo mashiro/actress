@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h1>Encounters</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <form ng-submit="list.search()">
+      <div class="form-group has-feedback">
+        <input type="search" class="form-control" ng-model="list.query" placeholder="Search">
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="encounters">
+  <div class="panel panel-default" ng-repeat="zone in list.zones">
+    <div class="panel-heading">{{zone.name}}</div>
+    <div class="list-group">
+      <a ui-sref="^.detail.summary({encid: encounter.encid})" class="list-group-item clearfix" ng-repeat="encounter in zone.encounters">
+        <span class="badge">{{encounter.zone}}</span>
+        <h4 class="list-group-item-heading">{{encounter.title}}</h4>
+        <dl>
+          <dt>Start Time</dt>
+          <dd>{{encounter.starttime | date : "medium"}}</dd>
+
+          <dt>Duration</dt>
+          <dd>{{encounter.duration | minutes}}</dd>
+
+          <dt>DPS</dt>
+          <dd>{{encounter.encdps | number}}</dd>
+
+          <dt>Deaths</dt>
+          <dd>{{encounter.deaths}}</dd>
+        </dl>
+      </a>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <ul class="pager">
+    <li ng-class="{disabled: !list.prev}"><a href ng-click="list.pageChanged($event, list.prev)">Prev</a></li>
+    <li ng-class="{disabled: !list.next}"><a href ng-click="list.pageChanged($event, list.next)">Next</a></li>
+  </ul>
+</nav>

@@ -1,0 +1,65 @@
+@import "~bootswatch/yeti/variables";
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootswatch/yeti/bootswatch";
+
+body {
+  padding-top: $navbar-height;
+}
+
+.fade-animation {
+  &.ng-enter {
+    transition: 0.3s ease-out all;
+    opacity: 0;
+  }
+  &.ng-enter.ng-enter-active {
+    opacity: 1;
+  }
+}
+
+#loading-bar .bar {
+  top: $navbar-height;
+}
+#loading-bar-spinner {
+  top: $navbar-height + 10;
+}
+
+#encounters {
+  dl {
+    margin: 10px 0 0;
+  }
+
+  dt, dd {
+    display: inline-block;
+  }
+  dt:not(:first-child) {
+    margin-left: 10px;
+  }
+  dd {
+    margin-left: 5px;
+  }
+}
+
+.nav-tabs {
+  margin-bottom: 20px;
+}
+
+#combatants {
+  td {
+    vertical-align: middle;
+  }
+
+  img.job {
+    margin-right: 1ex;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+#damage {
+  img.job {
+    width: 28px;
+    height: 28px;
+  }
+}
+

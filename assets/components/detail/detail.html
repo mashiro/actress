@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h3>{{detail.encounter.title}} <small>{{detail.encounter.zone}}</small></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li ui-sref-active="active"><a href ui-sref=".summary">Summary</a></li>
+      <li ui-sref-active="active"><a href ui-sref=".damage">Damage</a></li>
+      <li ui-sref-active="active"><a href ui-sref=".swings">Swings</a></li>
+    </ul>
+    <div ui-view class="fade-animation"></div>
+  </div>
+</div>
