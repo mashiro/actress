@@ -73,5 +73,7 @@ rake db:migrate
 ### ACT client configuration
 
 * Install MySQL ODBC
+* Check "Export data to an ODBC DB after combat"
+* Select "Export down to specific swings (large DB req)"
 * Set ACT ODBC ConnectionString (use act-clinet user)
 
