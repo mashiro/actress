@@ -15,13 +15,13 @@ namespace :db do
     desc 'Generate act db user create sql'
     task :create_sql do
       users = {
-        'act' => 'GRANT ALL',
+        'act' => 'ALL',
         'act-client' => 'SELECT, INSERT'
       }
 
       users.each do |user, priv|
         pass = SecureRandom.hex
-        puts %(GRANT #{priv} ON act.* TO #{user} IDENTIFIED BY '#{pass}')
+        puts %(GRANT #{priv} ON act.* TO '#{user}' IDENTIFIED BY '#{pass}')
       end
     end
   end
