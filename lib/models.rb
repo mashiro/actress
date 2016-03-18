@@ -35,10 +35,10 @@ class Encounter < ActiveRecord::Base
   include Paginatable
   include FullText
 
-  has_many :combatants, foreign_key: :encid
-  has_many :damage_types, foreign_key: :encid
-  has_many :attack_types, foreign_key: :encid
-  has_many :swings, foreign_key: :encid
+  has_many :combatants, foreign_key: :encid, dependent: :delete_all
+  has_many :damage_types, foreign_key: :encid, dependent: :delete_all
+  has_many :attack_types, foreign_key: :encid, dependent: :delete_all
+  has_many :swings, foreign_key: :encid, dependent: :delete_all
 
   scope :by_name, ->(name) { fulltext(['title', 'zone'], name) }
 end
