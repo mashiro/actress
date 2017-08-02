@@ -5,6 +5,12 @@ require_relative 'lib/models'
 require_relative 'lib/query'
 
 class Actress < Sinatra::Base
+  use Rack::Cors do
+    allow do
+      origins '*'
+      resource '/api/*', headers: :any, methods: :get
+    end
+  end
   use Rack::Deflater
   register Sinatra::ActiveRecordExtension
 
