@@ -8,7 +8,7 @@ namespace :db do
 
   desc 'Migrate the database'
   task :migrate do
-    sh %(bundle exec ridgepole -c config/database.yml -a), verbose: false
+    sh %(bundle exec ridgepole -c config/database.yml -a --enable-mysql-awesome), verbose: false
   end
 
   namespace :user do

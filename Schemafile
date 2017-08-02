@@ -1,77 +1,87 @@
-create_table "attacktype_table", id: false, force: :cascade do |t|
-  t.string   "encid",        limit: 8,  null: false
-  t.string   "attacker",     limit: 64
-  t.string   "victim",       limit: 64
-  t.integer  "swingtype",    limit: 1
-  t.string   "type",         limit: 64
-  t.datetime "starttime",               null: false
-  t.datetime "endtime",                 null: false
-  t.integer  "duration",     limit: 4
-  t.integer  "damage",       limit: 8
-  t.float    "encdps",       limit: 53
-  t.float    "chardps",      limit: 53
-  t.float    "dps",          limit: 53
-  t.float    "average",      limit: 24
-  t.integer  "median",       limit: 4
-  t.integer  "minhit",       limit: 4
-  t.integer  "maxhit",       limit: 4
-  t.string   "resist",       limit: 64
-  t.integer  "hits",         limit: 4
-  t.integer  "crithits",     limit: 4
-  t.integer  "blocked",      limit: 4
-  t.integer  "misses",       limit: 4
-  t.integer  "swings",       limit: 4
-  t.float    "tohit",        limit: 24
-  t.float    "averagedelay", limit: 24
-  t.string   "critperc",     limit: 8
-  t.integer  "parry",        limit: 4
-  t.string   "parrypct",     limit: 8
-  t.integer  "block",        limit: 4
-  t.string   "blockpct",     limit: 8
-  t.integer  "dmgreduced",   limit: 4
-  t.integer  "overheal",     limit: 4
+create_table "attacktype_table", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  t.string   "encid",              limit: 8,  null: false
+  t.string   "attacker",           limit: 64
+  t.string   "victim",             limit: 64
+  t.integer  "swingtype",          limit: 1
+  t.string   "type",               limit: 64
+  t.datetime "starttime",                     null: false
+  t.datetime "endtime",                       null: false
+  t.integer  "duration",           limit: 4
+  t.integer  "damage",             limit: 8
+  t.float    "encdps",             limit: 53
+  t.float    "chardps",            limit: 53
+  t.float    "dps",                limit: 53
+  t.float    "average",            limit: 24
+  t.integer  "median",             limit: 4
+  t.integer  "minhit",             limit: 4
+  t.integer  "maxhit",             limit: 4
+  t.string   "resist",             limit: 64
+  t.integer  "hits",               limit: 4
+  t.integer  "crithits",           limit: 4
+  t.integer  "blocked",            limit: 4
+  t.integer  "misses",             limit: 4
+  t.integer  "swings",             limit: 4
+  t.float    "tohit",              limit: 24
+  t.float    "averagedelay",       limit: 24
+  t.string   "critperc",           limit: 8
+  t.string   "crittypes",          limit: 32
+  t.integer  "parry",              limit: 4
+  t.string   "parrypct",           limit: 8
+  t.integer  "block",              limit: 4
+  t.string   "blockpct",           limit: 8
+  t.integer  "dmgreduced",         limit: 4
+  t.integer  "overheal",           limit: 4
+  t.string   "directhitpct",       limit: 8
+  t.integer  "directhitcount",     limit: 4
+  t.integer  "critdirecthitcount", limit: 4
+  t.string   "critdirecthitpct",   limit: 8
 end
 
 add_index "attacktype_table", ["encid", "attacker", "victim", "swingtype", "type"], name: "index_attacktype_table_on_type", using: :btree
 
-create_table "combatant_table", id: false, force: :cascade do |t|
-  t.string   "encid",          limit: 8,  null: false
-  t.string   "ally",           limit: 1
-  t.string   "name",           limit: 64, null: false
-  t.datetime "starttime",                 null: false
-  t.datetime "endtime",                   null: false
-  t.integer  "duration",       limit: 4
-  t.integer  "damage",         limit: 8
-  t.string   "damageperc",     limit: 4
-  t.integer  "kills",          limit: 4
-  t.integer  "healed",         limit: 8
-  t.string   "healedperc",     limit: 4
-  t.integer  "critheals",      limit: 4
-  t.integer  "heals",          limit: 4
-  t.integer  "curedispels",    limit: 4
-  t.integer  "powerdrain",     limit: 8
-  t.integer  "powerreplenish", limit: 8
-  t.float    "dps",            limit: 53
-  t.float    "encdps",         limit: 53
-  t.float    "enchps",         limit: 53
-  t.integer  "hits",           limit: 4
-  t.integer  "crithits",       limit: 4
-  t.integer  "blocked",        limit: 4
-  t.integer  "misses",         limit: 4
-  t.integer  "swings",         limit: 4
-  t.integer  "healstaken",     limit: 8
-  t.integer  "damagetaken",    limit: 8
-  t.integer  "deaths",         limit: 4
-  t.float    "tohit",          limit: 24
-  t.string   "critdamperc",    limit: 8
-  t.string   "crithealperc",   limit: 8
-  t.string   "threatstr",      limit: 32
-  t.integer  "threatdelta",    limit: 4
-  t.string   "job",            limit: 8
-  t.string   "parrypct",       limit: 8
-  t.string   "blockpct",       limit: 8
-  t.string   "inctohit",       limit: 8
-  t.string   "overhealpct",    limit: 8
+create_table "combatant_table", id: false, force: :cascade, options: "ENGINE=Mroonga DEFAULT CHARSET=utf8mb4" do |t|
+  t.string   "encid",              limit: 8,  null: false
+  t.string   "ally",               limit: 1
+  t.string   "name",               limit: 64, null: false
+  t.datetime "starttime",                     null: false
+  t.datetime "endtime",                       null: false
+  t.integer  "duration",           limit: 4
+  t.integer  "damage",             limit: 8
+  t.string   "damageperc",         limit: 4
+  t.integer  "kills",              limit: 4
+  t.integer  "healed",             limit: 8
+  t.string   "healedperc",         limit: 4
+  t.integer  "critheals",          limit: 4
+  t.integer  "heals",              limit: 4
+  t.integer  "curedispels",        limit: 4
+  t.integer  "powerdrain",         limit: 8
+  t.integer  "powerreplenish",     limit: 8
+  t.float    "dps",                limit: 53
+  t.float    "encdps",             limit: 53
+  t.float    "enchps",             limit: 53
+  t.integer  "hits",               limit: 4
+  t.integer  "crithits",           limit: 4
+  t.integer  "blocked",            limit: 4
+  t.integer  "misses",             limit: 4
+  t.integer  "swings",             limit: 4
+  t.integer  "healstaken",         limit: 8
+  t.integer  "damagetaken",        limit: 8
+  t.integer  "deaths",             limit: 4
+  t.float    "tohit",              limit: 24
+  t.string   "critdamperc",        limit: 8
+  t.string   "crithealperc",       limit: 8
+  t.string   "crittypes",          limit: 32
+  t.string   "threatstr",          limit: 32
+  t.integer  "threatdelta",        limit: 4
+  t.string   "job",                limit: 8
+  t.string   "parrypct",           limit: 8
+  t.string   "blockpct",           limit: 8
+  t.string   "inctohit",           limit: 8
+  t.string   "overhealpct",        limit: 8
+  t.string   "directhitpct",       limit: 8
+  t.integer  "directhitcount",     limit: 4
+  t.integer  "critdirecthitcount", limit: 4
+  t.string   "critdirecthitpct",   limit: 8
 end
 
 add_index "combatant_table", ["encdps"], name: "index_combatant_table_on_encdps", using: :btree
@@ -79,78 +89,88 @@ add_index "combatant_table", ["encid", "name"], name: "index_combatant_table_on_
 add_index "combatant_table", ["job"], name: "index_combatant_table_on_job", using: :btree
 add_index "combatant_table", ["name"], name: "index_combatant_table_on_name", type: :fulltext
 
-create_table "current_table", id: false, force: :cascade do |t|
-  t.string   "encid",          limit: 8
-  t.string   "ally",           limit: 1
-  t.string   "name",           limit: 64
-  t.datetime "starttime",                 null: false
-  t.datetime "endtime",                   null: false
-  t.integer  "duration",       limit: 4
-  t.integer  "damage",         limit: 8
-  t.string   "damageperc",     limit: 4
-  t.integer  "kills",          limit: 4
-  t.integer  "healed",         limit: 8
-  t.string   "healedperc",     limit: 4
-  t.integer  "critheals",      limit: 4
-  t.integer  "heals",          limit: 4
-  t.integer  "curedispels",    limit: 4
-  t.integer  "powerdrain",     limit: 8
-  t.integer  "powerreplenish", limit: 8
-  t.float    "dps",            limit: 53
-  t.float    "encdps",         limit: 53
-  t.float    "enchps",         limit: 53
-  t.integer  "hits",           limit: 4
-  t.integer  "crithits",       limit: 4
-  t.integer  "blocked",        limit: 4
-  t.integer  "misses",         limit: 4
-  t.integer  "swings",         limit: 4
-  t.integer  "healstaken",     limit: 8
-  t.integer  "damagetaken",    limit: 8
-  t.integer  "deaths",         limit: 4
-  t.float    "tohit",          limit: 24
-  t.string   "critdamperc",    limit: 8
-  t.string   "crithealperc",   limit: 8
-  t.string   "threatstr",      limit: 32
-  t.integer  "threatdelta",    limit: 4
-  t.string   "job",            limit: 8
-  t.string   "parrypct",       limit: 8
-  t.string   "blockpct",       limit: 8
-  t.string   "inctohit",       limit: 8
-  t.string   "overhealpct",    limit: 8
+create_table "current_table", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  t.string   "encid",              limit: 8
+  t.string   "ally",               limit: 1
+  t.string   "name",               limit: 64
+  t.datetime "starttime",                     null: false
+  t.datetime "endtime",                       null: false
+  t.integer  "duration",           limit: 4
+  t.integer  "damage",             limit: 8
+  t.string   "damageperc",         limit: 4
+  t.integer  "kills",              limit: 4
+  t.integer  "healed",             limit: 8
+  t.string   "healedperc",         limit: 4
+  t.integer  "critheals",          limit: 4
+  t.integer  "heals",              limit: 4
+  t.integer  "curedispels",        limit: 4
+  t.integer  "powerdrain",         limit: 8
+  t.integer  "powerreplenish",     limit: 8
+  t.float    "dps",                limit: 53
+  t.float    "encdps",             limit: 53
+  t.float    "enchps",             limit: 53
+  t.integer  "hits",               limit: 4
+  t.integer  "crithits",           limit: 4
+  t.integer  "blocked",            limit: 4
+  t.integer  "misses",             limit: 4
+  t.integer  "swings",             limit: 4
+  t.integer  "healstaken",         limit: 8
+  t.integer  "damagetaken",        limit: 8
+  t.integer  "deaths",             limit: 4
+  t.float    "tohit",              limit: 24
+  t.string   "critdamperc",        limit: 8
+  t.string   "crithealperc",       limit: 8
+  t.string   "crittypes",          limit: 32
+  t.string   "threatstr",          limit: 32
+  t.integer  "threatdelta",        limit: 4
+  t.string   "job",                limit: 8
+  t.string   "parrypct",           limit: 8
+  t.string   "blockpct",           limit: 8
+  t.string   "inctohit",           limit: 8
+  t.string   "overhealpct",        limit: 8
+  t.string   "directhitpct",       limit: 8
+  t.integer  "directhitcount",     limit: 4
+  t.integer  "critdirecthitcount", limit: 4
+  t.string   "critdirecthitpct",   limit: 8
 end
 
-create_table "damagetype_table", id: false, force: :cascade do |t|
-  t.string   "encid",        limit: 8,  null: false
-  t.string   "combatant",    limit: 64, null: false
-  t.string   "grouping",     limit: 92
-  t.string   "type",         limit: 64
-  t.datetime "starttime",               null: false
-  t.datetime "endtime",                 null: false
-  t.integer  "duration",     limit: 4
-  t.integer  "damage",       limit: 8
-  t.float    "encdps",       limit: 53
-  t.float    "chardps",      limit: 53
-  t.float    "dps",          limit: 53
-  t.float    "average",      limit: 24
-  t.integer  "median",       limit: 4
-  t.integer  "minhit",       limit: 4
-  t.integer  "maxhit",       limit: 4
-  t.integer  "hits",         limit: 4
-  t.integer  "crithits",     limit: 4
-  t.integer  "blocked",      limit: 4
-  t.integer  "misses",       limit: 4
-  t.integer  "swings",       limit: 4
-  t.float    "tohit",        limit: 24
-  t.float    "averagedelay", limit: 24
-  t.string   "critperc",     limit: 8
-  t.string   "parrypct",     limit: 8
-  t.string   "blockpct",     limit: 8
-  t.integer  "overheal",     limit: 4
+create_table "damagetype_table", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  t.string   "encid",              limit: 8,  null: false
+  t.string   "combatant",          limit: 64, null: false
+  t.string   "grouping",           limit: 92
+  t.string   "type",               limit: 64
+  t.datetime "starttime",                     null: false
+  t.datetime "endtime",                       null: false
+  t.integer  "duration",           limit: 4
+  t.integer  "damage",             limit: 8
+  t.float    "encdps",             limit: 53
+  t.float    "chardps",            limit: 53
+  t.float    "dps",                limit: 53
+  t.float    "average",            limit: 24
+  t.integer  "median",             limit: 4
+  t.integer  "minhit",             limit: 4
+  t.integer  "maxhit",             limit: 4
+  t.integer  "hits",               limit: 4
+  t.integer  "crithits",           limit: 4
+  t.integer  "blocked",            limit: 4
+  t.integer  "misses",             limit: 4
+  t.integer  "swings",             limit: 4
+  t.float    "tohit",              limit: 24
+  t.float    "averagedelay",       limit: 24
+  t.string   "critperc",           limit: 8
+  t.string   "crittypes",          limit: 32
+  t.string   "parrypct",           limit: 8
+  t.string   "blockpct",           limit: 8
+  t.integer  "overheal",           limit: 4
+  t.string   "directhitpct",       limit: 8
+  t.integer  "directhitcount",     limit: 4
+  t.integer  "critdirecthitcount", limit: 4
+  t.string   "critdirecthitpct",   limit: 8
 end
 
 add_index "damagetype_table", ["encid", "combatant", "type"], name: "index_damagetype_table_on_encid_and_combatant_and_type", unique: true, using: :btree
 
-create_table "encounter_table", id: false, force: :cascade do |t|
+create_table "encounter_table", id: false, force: :cascade, options: "ENGINE=Mroonga DEFAULT CHARSET=utf8mb4" do |t|
   t.string   "encid",     limit: 8,  null: false
   t.string   "title",     limit: 64
   t.datetime "starttime",            null: false
@@ -168,7 +188,7 @@ add_index "encounter_table", ["encid"], name: "index_encounter_table_on_encid", 
 add_index "encounter_table", ["starttime"], name: "index_encounter_table_on_starttime", using: :btree
 add_index "encounter_table", ["title", "zone"], name: "index_encounter_table_on_title_and_zone", type: :fulltext
 
-create_table "swing_table", id: false, force: :cascade do |t|
+create_table "swing_table", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
   t.string   "encid",        limit: 8,   null: false
   t.datetime "stime",                    null: false
   t.string   "attacker",     limit: 64
@@ -179,10 +199,13 @@ create_table "swing_table", id: false, force: :cascade do |t|
   t.integer  "damage",       limit: 4
   t.string   "damagestring", limit: 128
   t.string   "critical",     limit: 1
+  t.string   "criticalstr",  limit: 32
   t.string   "special",      limit: 64
   t.string   "dmgadjust",    limit: 8
+  t.string   "buffduration", limit: 8
   t.integer  "dmgreduced",   limit: 4
   t.integer  "overheal",     limit: 4
+  t.boolean  "directhit"
 end
 
 add_index "swing_table", ["encid", "attacker", "swingtype"], name: "index_swing_table_on_encid_and_attacker_and_swingtype", using: :btree
