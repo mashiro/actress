@@ -41,6 +41,12 @@ class Encounter < ActiveRecord::Base
   has_many :swings, foreign_key: :encid, dependent: :delete_all
 
   scope :by_name, ->(name) { fulltext(['title', 'zone'], name) }
+
+  class << self
+    def latest
+      order(starttime: :desc).first
+    end
+  end
 end
 
 class Combatant < ActiveRecord::Base
