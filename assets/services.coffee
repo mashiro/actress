@@ -9,10 +9,10 @@ mod.service 'utils', class Utils
     name = combatant.job
     name = combatant.name if name == ''
     name = name.toLowerCase()
-    "#{@Settings.ICON_BASE_URL}/images/default/#{name}.png"
+    "#{@Settings.ICON_BASE_URL}/#{name}.png"
 
   errIconUrl: () =>
-    "#{@Settings.ICON_BASE_URL}/images/error.png"
+    "#{@Settings.ICON_BASE_URL}/error.png"
 
   toSeconds: (s) =>
     Date.parse(s) / 1000

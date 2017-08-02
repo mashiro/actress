@@ -21,7 +21,7 @@ app = angular.module 'actress', [
 
 app.constant 'Settings',
   TITLE: 'ACTress'
-  ICON_BASE_URL: 'https://cdn.rawgit.com/billyvg/OverlayPlugin-themes/1.0.4'
+  ICON_BASE_URL: 'https://hibiyasleep.github.io/kagerou/share/img/class'
 
 app.config ($locationProvider, $stateProvider, $urlRouterProvider) ->
   $locationProvider.html5Mode true
