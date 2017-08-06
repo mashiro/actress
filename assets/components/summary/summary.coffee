@@ -46,9 +46,7 @@ mod.controller 'SummaryController', class SummaryController
         getData: ($defer, params) =>
           @$scope.dspChartConfig.loading = true
           @getCombatants($stateParams.encid, @includeEnemies).then (combatants) =>
-            unless angular.equals(@lastCombatants, combatants)
-              @lastCombatants = combatants
-              @updateDSPChart combatants
+            @updateDSPChart combatants
 
             if sorting = params.sorting()
               key = Object.keys(sorting)[0]
@@ -73,27 +71,29 @@ mod.controller 'SummaryController', class SummaryController
         combatants = _.filter(combatants, (c) -> c.ally is 'T') unless includeEnemies
         combatants
 
-  updateDSPChart: (combatants) =>
-    combatants = _.sortBy combatants, (c) => -c.encdps
-    chart = @$scope.dspChartConfig
+  updateDSPChart: (combatants, noUpdate = false) =>
+    unless angular.equals(@lastCombatants, combatants)
+      combatants = _.sortBy combatants, (c) => -c.encdps
+      chart = @$scope.dspChartConfig
 
-    chart.xAxis = [
-      categories: combatants.map (c) => c.name
-      crosshair: true
-    ]
+      chart.xAxis = [
+        categories: combatants.map (c) => c.name
+        crosshair: true
+      ]
 
-    chart.series = [
-      name: 'DPS'
-      type: 'column'
-      yAxis: 0
-      data: combatants.map (c) => c.encdps
-    ,
-      name: 'HPS'
-      type: 'column'
-      yAxis: 1
-      data: combatants.map (c) => c.enchps
-    ]
+      chart.series = [
+        name: 'DPS'
+        type: 'column'
+        yAxis: 0
+        data: combatants.map (c) => c.encdps
+      ,
+        name: 'HPS'
+        type: 'column'
+        yAxis: 1
+        data: combatants.map (c) => c.enchps
+      ]
 
+    @lastCombatants = combatants
     chart.loading = false
 
   reload: () =>
