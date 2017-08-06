@@ -37,12 +37,14 @@
             </td>
             <td data-title="'DPS'" data-sortable="'encdps'" class="text-right">{{combatant.encdps | number:2}}</td>
             <td data-title="'Damage'" data-sortable="'damage'" class="text-right">{{combatant.damage}}</td>
+            <td data-title="'DH (%)'" data-sortable="'directhitpct'" class="text-right">{{combatant.directhitpct}}</td>
+            <td data-title="'CH (%)'" data-sortable="'critdamperc'" class="text-right">{{combatant.critdamperc}}</td>
+            <td data-title="'CDH (%)'" data-sortable="'critdirecthitpct'" class="text-right">{{combatant.critdirecthitpct}}</td>
             <td data-title="'HPS'" data-sortable="'enchps'" class="text-right">{{combatant.enchps | number:2}}</td>
             <td data-title="'Healed'" data-sortable="'healed'" class="text-right">{{combatant.healed}}</td>
             <td data-title="'Overheal (%)'" data-sortable="'overhealpct'" class="text-right">{{combatant.overhealpct}}</td>
             <td data-title="'Damage Taken'" data-sortable="'damagetaken'" class="text-right">{{combatant.damagetaken}}</td>
             <td data-title="'Deaths'" data-sortable="'deaths'" class="text-right">{{combatant.deaths}}</td>
-            <td data-title="'ToHit (%)'" data-sortable="'tohit'" class="text-right">{{combatant.tohit | number:2}}%</td>
           </tr>
         </tbody>
       </table>
@@ -51,6 +53,5 @@
 
   <div class="col-md-12">
     <highchart id="dsp-chart" config="dspChartConfig"></highchart>
-    <!-- <div id="dps-chart"></div> -->
   </div>
 </div>
