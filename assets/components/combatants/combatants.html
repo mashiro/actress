@@ -1,6 +1,12 @@
 <div id="combatants" class="row">
   <div class="list col-md-3">
     <ul class="nav nav-pills nav-stacked">
+      <li ui-sref-active="active" ng-if="combatants.showAll">
+        <a ui-sref=".detail({name: 'all'})">
+          <span class="job"></span>
+          <span>All</span>
+        </a>
+      </li>
       <li ui-sref-active="active" ng-repeat="combatant in combatants.combatants">
         <a ui-sref=".detail({name: combatant.name})">
           <img class="job" ng-src="{{combatants.utils.iconUrl(combatant)}}" err-src="{{combatants.utils.errIconUrl()}}" alt="{{combatant.job}}" title="{{combatant.job}}">

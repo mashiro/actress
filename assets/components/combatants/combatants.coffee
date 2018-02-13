@@ -2,7 +2,9 @@ mod = angular.module 'actress.combatants', []
 
 mod.controller 'CombatantsController', class CombatantsController
   ### @ngInject ###
-  constructor: ($stateParams, @utils, Combatant) ->
+  constructor: ($state, $stateParams, @utils, Combatant) ->
+    @showAll = $state.includes('detail.swings')
+
     Combatant.query($stateParams.encid)
       .then (result) =>
         result.data.data

@@ -5,6 +5,9 @@ mod.controller 'SwingsController', class SwingsController
   constructor: (@$scope, @$stateParams, @$q, @$filter, @utils, @Swing, @ngTableParams) ->
     orderBy = @$filter 'orderBy'
 
+    @showAll = @$stateParams.name == 'all'
+    @attackers = []
+
     @with =
       aa: false
       ws: true
@@ -36,21 +39,39 @@ mod.controller 'SwingsController', class SwingsController
       })
 
     @$scope.$watch (() => @with), @reload, true
+    @$scope.$watch (() => @attackers), @reload, true
 
-  reload: =>
-    @tableParams.reload()
+  reload: (newValue, oldValue) =>
+    unless _.isEmpty(oldValue)
+      @tableParams.reload()
 
   getSwings: (encid, name) =>
-    @Swing.query(encid, name: name).then (res) =>
-      swings = res.data.data
-      check = (a, b) => !a or (a and b)
+    options = {}
+    unless @showAll
+      options['name'] = name
 
-      _(swings)
-        .filter (swing) => check(@utils.isAA(swing), @with.aa)
-        .filter (swing) => check(@utils.isWS(swing), @with.ws)
-        .filter (swing) => check(@utils.isDoT(swing), @with.dot)
-        .filter (swing) => check(@utils.isHeal(swing), @with.heal)
-        .filter (swing) => check(@utils.isHoT(swing), @with.hot)
-        .filter (swing) => check(@utils.isBuff(swing), @with.buff)
-        .value()
+    @Swing.query(encid, options).then (res) =>
+      swings = res.data.data
+      typeFilter = (a, b) => !a or (a and b)
+
+      _swings = _(swings)
+        .filter (swing) => typeFilter(@utils.isAA(swing), @with.aa)
+        .filter (swing) => typeFilter(@utils.isWS(swing), @with.ws)
+        .filter (swing) => typeFilter(@utils.isDoT(swing), @with.dot)
+        .filter (swing) => typeFilter(@utils.isHeal(swing), @with.heal)
+        .filter (swing) => typeFilter(@utils.isHoT(swing), @with.hot)
+        .filter (swing) => typeFilter(@utils.isBuff(swing), @with.buff)
+
+      if @showAll
+        if _.isEmpty(@attackers)
+          @attackers = _(swings).map (swing) => swing.attacker
+            .uniq()
+            .map (name) => {name: name, show: false}
+            .value()
+
+        _swings = _swings.filter (swing) =>
+          _.find(@attackers, (attacker) => attacker.name == swing.attacker)?.show
+
+      _swings.value()
+
 

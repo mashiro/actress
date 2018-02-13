@@ -49,10 +49,10 @@ body {
     vertical-align: middle;
   }
 
-  img.job {
+  .job {
+    display: inline-block;
     margin-right: 1ex;
     width: 24px;
-    height: 24px;
   }
 }
 

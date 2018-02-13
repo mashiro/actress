@@ -1,5 +1,13 @@
 <div class="row">
   <div class="col-md-12">
+    <p class="btn-group pull-right" ng-if="swings.showAll">
+      <label class="checkbox-inline" ng-repeat="attacker in swings.attackers">
+        <input type="checkbox" autocomplete="off" ng-model="attacker.show"> {{ attacker.name }}
+      </label>
+    </p>
+  </div>
+
+  <div class="col-md-12">
     <p class="btn-group pull-right">
       <label class="checkbox-inline">
         <input type="checkbox" autocomplete="off" ng-model="swings.with.aa"> Auto Attack
@@ -28,6 +36,7 @@
         <tbody>
           <tr ng-repeat="swing in $data">
             <td data-title="'Time'" data-sortable="'stime'">{{swing.stime | date : "medium"}}</td>
+            <td data-title="'Attacker'" data-sortable="'attacker'" ng-if="swings.showAll">{{swing.attacker}}</td>
             <td data-title="'Attack Type'" data-sortable="'attacktype'">{{swing.attacktype}}</td>
             <td data-title="'Damage Type'" data-sortable="'damagetype'">{{swing.damagetype}}</td>
             <td data-title="'Victim'" data-sortable="'victim'">{{swing.victim}}</td>
