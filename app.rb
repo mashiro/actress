@@ -65,6 +65,11 @@ class Actress < Sinatra::Base
     json({data: scope})
   end
 
+  get '/api/*' do
+    status 404
+    json({data: 'Not found'})
+  end
+
   get '*' do
     erb :index
   end
