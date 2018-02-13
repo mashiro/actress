@@ -15,15 +15,23 @@ mod.controller 'ListController', class ListController
 
         @zones = []
         zone = null
+        lastEncounter = null
 
         for encounter in res.data
-          if zone?.name != encounter.zone
+          unless @isSameZone lastEncounter, encounter
             zone = {}
             zone.name = encounter.zone
             zone.encounters = []
             @zones.push zone
 
+          lastEncounter = encounter
           zone.encounters.push encounter
+
+  isSameZone: (a, b) =>
+    return false if !a or !b
+    return false if a.name != b.name
+    return false if Math.abs(Date.parse(a.starttime) - Date.parse(b.starttime)) >= (20 * 60 * 1000)
+    true
 
   refresh: () =>
     @$state.go '.', @$stateParams, reload: true
