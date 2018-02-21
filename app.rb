@@ -11,7 +11,6 @@ class Actress < Sinatra::Base
       resource '/api/*', headers: :any, methods: :get
     end
   end
-  use Rack::Deflater
   register Sinatra::ActiveRecordExtension
 
   configure :production do
