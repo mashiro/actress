@@ -35,7 +35,7 @@
       <table ng-table="swings.tableParams" id="swings" class="table">
         <tbody>
           <tr ng-repeat="swing in $data">
-            <td data-title="'Time'" data-sortable="'stime'">{{swing.stime | date : "medium"}}</td>
+            <td data-title="'Time'" data-sortable="'stime'">{{swings.relativeTime(swing.stime) / 1000 | minutes}}</td>
             <td data-title="'Attacker'" data-sortable="'attacker'" ng-if="swings.showAll">{{swing.attacker}}</td>
             <td data-title="'Attack Type'" data-sortable="'attacktype'">{{swing.attacktype}}</td>
             <td data-title="'Damage Type'" data-sortable="'damagetype'">{{swing.damagetype}}</td>

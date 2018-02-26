@@ -2,7 +2,7 @@ mod = angular.module 'actress.swings', []
 
 mod.controller 'SwingsController', class SwingsController
   ### @ngInject ###
-  constructor: (@$scope, @$stateParams, @$q, @$filter, @utils, @Swing, @ngTableParams) ->
+  constructor: (@$scope, @$stateParams, @$q, @$filter, @utils, @Encounter, @Swing, @ngTableParams) ->
     orderBy = @$filter 'orderBy'
 
     @showAll = @$stateParams.name == 'all'
@@ -22,19 +22,27 @@ mod.controller 'SwingsController', class SwingsController
       }, {
         counts: []
         getData: ($defer, params) =>
-          @getSwings(@$stateParams.encid, @$stateParams.name).then (swings) =>
-            if sorting = params.sorting()
-              key = Object.keys(sorting)[0]
-              order = sorting[key] is "desc"
-              getter = (obj) =>
-                v = obj[key]
-                n = parseFloat(v)
-                n = -1 if key.match(/perc$/) and isNaN(n)
-                if isNaN(n) then v else n
-              swings = orderBy swings, getter, order
+          encid = @$stateParams.encid
+          promises = @$q.all({
+            swings: @getSwings(encid, @$stateParams.name).then (swings) =>
+              if sorting = params.sorting()
+                key = Object.keys(sorting)[0]
+                order = sorting[key] is "desc"
+                getter = (obj) =>
+                  v = obj[key]
+                  n = parseFloat(v)
+                  n = -1 if key.match(/perc$/) and isNaN(n)
+                  if isNaN(n) then v else n
+                swings = orderBy swings, getter, order
+              swings
 
-            $defer.resolve swings
-            return
+            encounter: @getEncounter(encid)
+          })
+
+          promises.then (result) =>
+            @encounter = result.encounter
+            $defer.resolve result.swings
+
           return
       })
 
@@ -44,6 +52,14 @@ mod.controller 'SwingsController', class SwingsController
   reload: (newValue, oldValue) =>
     unless _.isEmpty(oldValue)
       @tableParams.reload()
+
+  relativeTime: (stime) =>
+    new Date(stime) - new Date(@encounter.starttime)
+
+  getEncounter: (encid) =>
+    @Encounter.find(encid)
+      .then (result) =>
+        result.data.data
 
   getSwings: (encid, name) =>
     options = {}
